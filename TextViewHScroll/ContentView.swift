@@ -38,8 +38,9 @@ struct ContentView: View {
     HStack(spacing: 0) {
       LinearGradient(gradient: Gradient(colors: [color.opacity(0), color]), 
                      startPoint: .leading, endPoint: .trailing).frame(width: gradientWidth)
+        .transition(.opacity)
         .overlay {
-          Color.black.opacity(isOffsetMin ? 0 : 1)
+          Color.black.opacity(isOffsetMin && scrollViewOffset < 0 ? 0 : 1)
         }
       
       Rectangle()
@@ -48,6 +49,7 @@ struct ContentView: View {
       LinearGradient(gradient: Gradient(colors: [color, color.opacity(0)]), 
                      startPoint: .leading, endPoint: .trailing)
       .frame(width: gradientWidth)
+      .transition(.opacity)
       .overlay {
         Color.black.opacity(isOffsetMax ? 0 : 1)
       }
